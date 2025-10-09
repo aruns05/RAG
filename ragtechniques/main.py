@@ -14,6 +14,7 @@ PDF_PATH = "./data/Understanding_Climate_Change.pdf"
 if __name__ == "__main__":
     print("Loading environment variables from .env file")
     
+    #
     chunks_vector_store = encode_pdf(PDF_PATH, chunk_size=1000, chunk_overlap=200)
     # print("Chunks in vector store:",  chunks_vector_store)
     # docstore = chunks_vector_store.docstore

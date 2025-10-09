@@ -78,19 +78,22 @@ def encode_pdf(path, chunk_size=1000, chunk_overlap=200):
     cleaned_texts = replace_t_with_space(texts)
 
     # Create embeddings and vector store
-    embeddings = _get_embeddings() #OpenAIEmbeddings()
+    embeddings = _get_embeddings_Vertex() #OpenAIEmbeddings()
     vectorstore = FAISS.from_documents(cleaned_texts, embeddings)
 
     return vectorstore
 
-def _get_embeddings():
-    PROJECT_ID = config.GCP_PROJECT_ID #os.getenv("GCP_PROJECT_ID")
+def _get_embeddings_Vertex():
+    PROJECT_ID = config.GCP_PROJECT_ID
     vertexai.init(project=PROJECT_ID, location="us-central1")
     #embeddings = OpenAIEmbeddings()
     
     # Initialize the a specific Embeddings Model version
     embeddings = VertexAIEmbeddings(model_name="gemini-embedding-001")
     return embeddings
+
+    
+    
 
 def encode_from_string(content, chunk_size=1000, chunk_overlap=200):
     """
